@@ -31,6 +31,7 @@ let () =
   let stringgraph4 = gmap graph4 string_of_int in 
 
   (* Rewrite the graph that has been read. *)
-  let () = write_file outfile stringgraph4 in
+  (* let () = write_file outfile stringgraph4 in *)
+  let () = export outfile graph in
 
   ()

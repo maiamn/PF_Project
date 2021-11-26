@@ -4,6 +4,7 @@
 open Graph
 
 type path = string
+type file = string
 
 (* Values are read as strings. *)
 val from_file: path -> string graph
@@ -11,6 +12,9 @@ val from_file: path -> string graph
 (* Similarly, we write only a string graph.
  * If necessary, use gmap (to be written by you) to prepare the input graph. *)
 val write_file: path -> string graph -> unit
+
+(*writes a string graph in dot format*)
+val export: file -> string graph -> unit
 
 
 

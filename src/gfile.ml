@@ -2,6 +2,7 @@ open Graph
 open Printf
 
 type path = string
+type file = string
 
 (* Format of text files:
    % This is a comment
@@ -99,3 +100,42 @@ let from_file path =
   close_in infile ;
   final_graph
 
+
+
+(* Format of dot files:
+   /* This is a comment */
+
+   digraph finite_state_machine {
+	rankdir=LR;
+	node [shape = circle];
+	0 -> 2 [label = "SS(B)"];
+        .
+        .
+        .
+	8 -> 5 [label = "S(a)"];
+   }
+*)
+
+let export file graph =
+
+  (* Open a write-file. *)
+  let dot = open_out file in
+
+  (* Write in this file. *)
+  fprintf dot "/* This is a graph in dot format. */\n" ;
+
+  (* Write the dot format graph *)
+  fprintf dot 
+     "digraph dotgraph { \n rankdir=LR; \n node [shape = circle]; \n" ; 
+
+  (* Write all arcs on dot format *)
+  e_iter graph (fun id1 id2 lbl -> fprintf dot "%d -> %d [label = %s] ;\n" id1 id2 lbl) ;
+
+  fprintf dot "}" ;
+
+  (* Fin du fichier *)
+  fprintf dot "\n /* End of graph */\n" ;
+
+  (* Fermeture du fichier *)
+  close_out dot ;
+  ()
