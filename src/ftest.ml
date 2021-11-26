@@ -1,5 +1,6 @@
 open Gfile
 open Tools 
+open Fordfulkerson
 
 let () =
 
@@ -23,15 +24,19 @@ let () =
 
   (* Open file *)
   let graph = from_file infile in
+ 
 
   (*let graph2 = clone_nodes graph in *)
   (*let graph3 = gmap graph (fun x -> string_of_int((int_of_string(x)*2))) in*)
   let intgraph = gmap graph int_of_string in   
-  let graph4 = add_arc intgraph 0 4 1000 in
-  let stringgraph4 = gmap graph4 string_of_int in 
+  (*let graph4 = add_arc intgraph 0 4 1000 in
+  let stringgraph4 = gmap graph4 string_of_int in*)
+
+  let graph5 = init_flow_graph intgraph in 
+  let stringgraph5 = gmap graph5 string_of_flow_label in
 
   (* Rewrite the graph that has been read. *)
-  (* let () = write_file outfile stringgraph4 in *)
-  let () = export outfile graph in
+  let () = write_file outfile stringgraph5 in 
+  (*let () = export outfile graph in*)
 
   ()
