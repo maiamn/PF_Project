@@ -46,7 +46,7 @@ and explore_out_arcs residual_graph sink nodes_path = function
    | [] -> None
    (*si il y a des arcs sortants, on regarde le premier noeud de la liste*)
    (*si ce noeud appartient déjà au chemin alors on le passe*)
-   | (id, lbl)::rest -> if (List.mem id nodes_path) then (explore_out_arcs residual_graph sink nodes_path rest)
+   | (id, lbl)::rest -> if (List.mem id nodes_path || lbl=0) then (explore_out_arcs residual_graph sink nodes_path rest)
     (*sinon on l'explore*)
     else match (find_path residual_graph id sink (id::nodes_path)) with 
       | None -> (explore_out_arcs residual_graph sink nodes_path rest)

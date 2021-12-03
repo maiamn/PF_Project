@@ -36,10 +36,11 @@ let () =
   (*let stringgraph5 = gmap graph5 string_of_flow_label in*)
 
   let graph6 = get_residual_graph graph5 in 
-  let stringgraph6 = gmap graph6 string_of_int in
+  (*let stringgraph6 = gmap graph6 string_of_int in*)
+  let path1 = find_path graph6 0 5 [] in
 
   (* Rewrite the graph that has been read. *)
-  let () = write_file outfile stringgraph6 in 
-  let () = export outfile stringgraph6 in
+  let () = write_file outfile path1 in 
+  (*let () = export outfile stringgraph6 in*)
 
   ()
