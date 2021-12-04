@@ -139,3 +139,28 @@ let export file graph =
   (* Fermeture du fichier *)
   close_out dot ;
   ()
+
+
+(* Writes an id list in string format in a file *)
+(*let export_path file path =
+
+  (* Open a write-file. *)
+  let file_path = open_out file in
+
+  (* Write in this file. *)
+  fprintf file_path "/* This is a path. */\n" ;
+
+  (* Write the path in the file *)
+  let rec loop path = function
+    | [] -> path
+    | x::rest -> fprintf file_path string_of_int(x) ; loop rest
+  in 
+  loop 0 (length path)  
+
+  (* Fin du fichier *)
+  fprintf file_path "\n /* End of path. */\n" ;
+
+  (* Fermeture du fichier *)
+  close_out file_path ;
+  ()*)
+

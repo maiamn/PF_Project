@@ -2,11 +2,12 @@ open Graph
 open Tools
 open Gfile
 
-type path = id list 
 
 type flow_label = 
   { flow : int ; 
     capacity : int } 
+
+type pathId = id list
 
 
 let string_of_flow_label x = string_of_int(x.flow) ^ "/" ^ string_of_int(x.capacity)
