@@ -11,6 +11,9 @@ type pathId = id list
 (* Function which takes a flow label and returns a string *)
 val string_of_flow_label : flow_label -> string 
 
+(* Function which takes a pathId and returns a string *)
+val string_of_path : pathId option -> string 
+
 (* Function which takes a graph and returns the associated flow graph *)
 val init_flow_graph : int graph -> flow_label graph
 

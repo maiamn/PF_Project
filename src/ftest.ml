@@ -39,9 +39,19 @@ let () =
 
   let graph6 = get_residual_graph graph5 in 
   (*let stringgraph6 = gmap graph6 string_of_int in*)
+
+  (*let path2 = (Some [1; 2; 5; 18]) in*)
   let path1 = find_path graph6 0 5 [] in
-  let () = List.iter (printf "%d") path1 in
+  let stringpath1 = string_of_path path1 in
+  
+  let () = printf "%s" stringpath1 in
+
+  
+  
   (* Rewrite the graph that has been read. *) 
+
   (*let () = export outfile stringgraph6 in*)
+  (*let () = write_file outfile stringgraph6 in*)
+
 
   ()

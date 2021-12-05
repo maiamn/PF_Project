@@ -12,6 +12,14 @@ type pathId = id list
 
 let string_of_flow_label x = string_of_int(x.flow) ^ "/" ^ string_of_int(x.capacity)
 
+let rec string_of_path_aux accu = function
+  | [] -> (accu ^ "end")
+  | a::b -> (string_of_path_aux (" node " ^ (string_of_int a) ^ " -> " ^ accu) b)
+
+let string_of_path = function 
+  | None -> "None"
+  | Some p -> string_of_path_aux "" p
+
 
 (* Function which takes a graph and returns the associated flow graph *)
 let init_flow_graph graph = 
