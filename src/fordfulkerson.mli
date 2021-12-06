@@ -14,6 +14,8 @@ val string_of_flow_label : flow_label -> string
 (* Function which takes a pathId and returns a string *)
 val string_of_path : pathId option -> string 
 
+val string_of_path_aux : string -> pathId -> string 
+
 (* Function which takes a graph and returns the associated flow graph *)
 val init_flow_graph : int graph -> flow_label graph
 
@@ -21,7 +23,7 @@ val init_flow_graph : int graph -> flow_label graph
 val get_residual_graph : flow_label graph -> int graph
 
 (* Function which takes a graph, a source and a sink and returns a path from source to sink*) 
-val find_path : int graph -> id -> id -> pathId -> pathId option
+val find_path : int graph -> id -> id -> pathId option
 
-(* Function which takes a path and a graph and returns the minimal label of arcs of the path 
-val get_incremental_value : 'a graph -> path -> int*)
+(* Function which takes a path and a graph and returns the minimal label of arcs of the path *)
+val get_incremental_value : int graph -> pathId option -> int

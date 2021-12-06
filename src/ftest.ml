@@ -1,7 +1,6 @@
 open Gfile
 open Tools 
 open Fordfulkerson
-open List
 open Printf
 
 let () =
@@ -41,10 +40,12 @@ let () =
   (*let stringgraph6 = gmap graph6 string_of_int in*)
 
   (*let path2 = (Some [1; 2; 5; 18]) in*)
-  let path1 = find_path graph6 0 5 [] in
+  let path1 = find_path graph6 0 5 in
   let stringpath1 = string_of_path path1 in
+  let labels = get_incremental_value graph6 path1 in
+  let labelsstring = string_of_int labels in
   
-  let () = printf "%s" stringpath1 in
+  let () = printf "%s\n" ("min : " ^ labelsstring) in
 
   
   
