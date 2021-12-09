@@ -104,4 +104,26 @@ let rec update_graph gr path value =
       let gr3 = add_arc gr2 id2 id1 value in
       update_graph gr3 rest value
 
-   
+
+(* Function to implement the main loop of ford fulkerson algorithm 
+ * 1. find a path from source to sink in the graph
+ * 2. get the incremental value of this path 
+ * 3. update the graph with by incrementing this value 
+*)
+let loop_ff graph src dest = 
+  match (find_path graph src dest) with
+  | None -> None
+  | Some path ->
+    let flow = get_incremental_value graph path in
+    let newGraph = update_graph graph path flow in
+    Some (newGraph, flow)
+
+(* Function which takes a graph, a soource, a sink, a graph accumulator, an int accumulator and returns a tuple containing the final graph and the final maximal flow *)
+let rec ff_aux graph src dest acu_gr acu_flow =
+  match (loop_ff graph src dest) with
+  | None -> (acu_gr, acu_flow)
+  | Some (newGraph, flow) -> ff_aux newGraph src dest newGraph (acu_flow + flow)
+  
+(* Function which takes a graph, a source, a sink and returns a tuple containing the final graph and the maximal flow  *)
+let ford_fulkerson graph src dest =
+  ff_aux graph src dest graph 0

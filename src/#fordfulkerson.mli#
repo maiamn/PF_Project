@@ -31,5 +31,8 @@ val get_incremental_value : int graph -> pathId -> int
 (* Function which takes a graph, a path and an value and add the value to label of all arcs of the path *)
 val update_graph : int graph -> pathId -> int -> int graph 
 
+(* Function to implement the main loop of ford fulkerson algorithm which takes a graph, a source, a sink and returns a tuple containing a graph and an integer *)
+val loop_ff : int graph -> id -> id -> (int graph * int) option 
+
 (* Function which takes a graph, a source, a sink and returns a tuple containing the final graph and the maximal flow  *)
 val ford_fulkerson : int graph -> id -> id -> (int graph * int)
