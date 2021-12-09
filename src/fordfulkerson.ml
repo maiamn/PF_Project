@@ -80,14 +80,28 @@ let rec find_min min = function
   | lbl::rest -> if (lbl < min) then find_min lbl rest else find_min min rest
 
 let rec get_incremental_value_aux graph path accu =
-   match path with
+  match path with
+     | [] -> accu
      | [x] -> accu
-     | (id1::rest) -> match rest with 
+     | (id1::rest) -> match rest with
+                        | [] -> accu
                         | (id2::rest2) -> match (find_arc graph id1 id2) with 
                                             | None -> accu
                                             | Some lbl -> get_incremental_value_aux graph rest (lbl::accu)
                         
 let get_incremental_value graph path = 
-   match path with
-     | None -> -1
-     | Some p -> (find_min 9999 (get_incremental_value_aux graph p [])) 
+  find_min 9999 (get_incremental_value_aux graph path [])
+
+
+(* Function which takes a graph, a path and an value and add the value to label of all arcs of the path *)
+
+let rec update_graph graph path value = assert false
+  (*match path with
+  | [] -> graph
+  | [x] -> graph
+  | id1::rest -> match rest with
+    | id2::rest2 -> update_graph ((e_fold graph (add_arc graph id1 id2 value) (clone_nodes graph)) rest value)*)
+
+
+
+   

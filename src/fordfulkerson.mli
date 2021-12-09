@@ -26,4 +26,7 @@ val get_residual_graph : flow_label graph -> int graph
 val find_path : int graph -> id -> id -> pathId option
 
 (* Function which takes a path and a graph and returns the minimal label of arcs of the path *)
-val get_incremental_value : int graph -> pathId option -> int
+val get_incremental_value : int graph -> pathId -> int
+
+(* Function which takes a graph, a path and an value and add the value to label of all arcs of the path *)
+val update_graph : int graph -> pathId -> int -> int graph 
