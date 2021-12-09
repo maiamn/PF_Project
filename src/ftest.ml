@@ -27,30 +27,50 @@ let () =
   let graph = from_file infile in
  
 
-  (*let graph2 = clone_nodes graph in *)
-  (*let graph3 = gmap graph (fun x -> string_of_int((int_of_string(x)*2))) in*)
-  let intgraph = gmap graph int_of_string in   
-  (*let graph4 = add_arc intgraph 0 4 1000 in
-  let stringgraph4 = gmap graph4 string_of_int in*)
 
+  (******************** TEST FUNCTION clone_nodes *********************)
+  (*let graph2 = clone_nodes graph in*)
+
+  
+  (*********************** TEST FUNCTION gmap *************************)
+  (*let graph3 = gmap graph (fun x -> string_of_int((int_of_string(x)*2))) in *)
+  let intgraph = gmap graph int_of_string in
+
+  
+  (********************** TEST FUNCTION add_arc ***********************)
+  (*let graph4 = add_arc intgraph 0 4 1000 in
+    let stringgraph4 = gmap graph4 string_of_int in*)
+
+  
+  (****************** TEST FUNCTION init_flow_graph *******************)
   let graph5 = init_flow_graph intgraph in 
   (*let stringgraph5 = gmap graph5 string_of_flow_label in*)
 
+  
+  (***************** TEST FUNCTION get_residual_graph *****************)
   let graph6 = get_residual_graph graph5 in 
   (*let stringgraph6 = gmap graph6 string_of_int in*)
 
-  (*let path2 = (Some [1; 2; 5; 18]) in*)
-  let path1 = find_path graph6 0 5 in
-  let stringpath1 = string_of_path path1 in
-  let labels = get_incremental_value graph6 path1 in
-  let labelsstring = string_of_int labels in
   
-  let () = printf "%s\n" ("min : " ^ labelsstring) in
+  (********************* TEST FUNCTION find_path **********************)
+  let path2 = [0; 3; 1; 4; 5] in
+  
+  (*let path1 = find_path graph6 0 5 in
+    let stringpath1 = string_of_path path1 in*)
 
   
+  (*************** TEST FUNCTION get_incremental_value ****************)
+  let label = get_incremental_value graph6 path2 in
+  let labelstring = string_of_int label in 
+  let () = printf "%s\n" ("min : " ^ labelstring) in 
+
+  
+  (******************** TEST FUNCTION update_graph ********************)
+  (*let graph7 = update_graph graph6 path1 label in
+    let stringgraph7 = gmap graph7 string_of_int in *)
+
   
   (* Rewrite the graph that has been read. *) 
-
   (*let () = export outfile stringgraph6 in*)
   (*let () = write_file outfile stringgraph6 in*)
 
