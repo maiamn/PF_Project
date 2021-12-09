@@ -68,11 +68,16 @@ let () =
   
   (******************** TEST FUNCTION update_graph ********************)
   let graph7 = update_graph graph6 path2 label in
-  let stringgraph7 = gmap graph7 string_of_int in 
+  let stringgraph7 = gmap graph7 string_of_int in
 
+
+  (******************* TEST FUNCTION ford_fulkerson *******************)
+  let (graphff, flowff) = ford_fulkerson intgraph 0 5 in
+  let stringgraph_ff = gmap graph7 string_of_int in
+  let () = printf "%s\n" ("flow : " ^ string_of_int flowff) in 
   
   (* Rewrite the graph that has been read. *) 
-  let () = export outfile stringgraph7 in
+  let () = export outfile stringgraph_ff in
   (*let () = write_file outfile stringgraph7 in*)
 
 

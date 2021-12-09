@@ -126,4 +126,6 @@ let rec ff_aux graph src dest acu_gr acu_flow =
   
 (* Function which takes a graph, a source, a sink and returns a tuple containing the final graph and the maximal flow  *)
 let ford_fulkerson graph src dest =
-  ff_aux graph src dest graph 0
+  let flow_graph = init_flow_graph graph in
+  let residual_graph = get_residual_graph flow_graph in
+  ff_aux graph src dest residual_graph 0
