@@ -49,15 +49,16 @@ let () =
   
   (***************** TEST FUNCTION get_residual_graph *****************)
   let graph6 = get_residual_graph graph5 in 
-  (*let stringgraph6 = gmap graph6 string_of_int in*)
+  let stringgraph6 = gmap graph6 string_of_int in
 
   
   (********************* TEST FUNCTION find_path **********************)
-  let path2 = [0; 3; 1; 4; 5] in
+  let path2 = [0; 1; 5] in
   let path3 = [0; 3; 1; 5] in 
   
-  (*let path1 = find_path graph6 0 5 in
-    let stringpath1 = string_of_path path1 in*)
+  (* let path1 = find_path graph6 0 5 in
+  let stringpath1 = string_of_path path1 in
+  let () = printf "%s\n" ("path trouve : " ^ stringpath1) in *)
 
   
   (*************** TEST FUNCTION get_incremental_value ****************)
@@ -70,14 +71,18 @@ let () =
   let graph7 = update_graph graph6 path2 label in
   let stringgraph7 = gmap graph7 string_of_int in
 
+  let pathT = find_path graph7 0 5 in
+  let stringpath2 = string_of_path pathT in
+  let () = printf "%s\n" ("path trouve : " ^ stringpath2) in
+
 
   (******************* TEST FUNCTION ford_fulkerson *******************)
-  let (graphff, flowff) = ford_fulkerson intgraph 0 5 in
+  (*let (graphff, flowff) = ford_fulkerson intgraph 0 5 in
   let stringgraph_ff = gmap graph7 string_of_int in
-  let () = printf "%s\n" ("flow : " ^ string_of_int flowff) in 
+  let () = printf "%s\n" ("flow : " ^ string_of_int flowff) in *)
   
   (* Rewrite the graph that has been read. *) 
-  let () = export outfile stringgraph_ff in
+  let () = export outfile stringgraph7 in
   (*let () = write_file outfile stringgraph7 in*)
 
 

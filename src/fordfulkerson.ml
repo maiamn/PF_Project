@@ -101,7 +101,7 @@ let rec update_graph gr path value =
   | [x] -> gr
   | id1::rest -> match rest with
     | id2::rest2 -> let gr2 = add_arc gr id1 id2 (-value) in
-      let gr3 = add_arc gr2 id2 id1 value in
+      let gr3 = add_arc gr2 id2 id1 (+value) in
       update_graph gr3 rest value
 
 
@@ -111,7 +111,8 @@ let rec update_graph gr path value =
  * 3. update the graph with by incrementing this value 
 *)
 let loop_ff graph src dest = 
-  match (find_path graph src dest) with
+  let p = find_path graph src dest in 
+  match p with
   | None -> None
   | Some path ->
     let flow = get_incremental_value graph path in
@@ -120,7 +121,8 @@ let loop_ff graph src dest =
 
 (* Function which takes a graph, a soource, a sink, a graph accumulator, an int accumulator and returns a tuple containing the final graph and the final maximal flow *)
 let rec ff_aux graph src dest acu_gr acu_flow =
-  match (loop_ff graph src dest) with
+  let res = loop_ff graph src dest in 
+  match res with
   | None -> (acu_gr, acu_flow)
   | Some (newGraph, flow) -> ff_aux newGraph src dest newGraph (acu_flow + flow)
   
@@ -128,4 +130,4 @@ let rec ff_aux graph src dest acu_gr acu_flow =
 let ford_fulkerson graph src dest =
   let flow_graph = init_flow_graph graph in
   let residual_graph = get_residual_graph flow_graph in
-  ff_aux graph src dest residual_graph 0
+  ff_aux residual_graph src dest residual_graph 0
