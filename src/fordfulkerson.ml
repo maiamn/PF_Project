@@ -95,13 +95,13 @@ let get_incremental_value graph path =
 
 (* Function which takes a graph, a path and an value and add the value to label of all arcs of the path *)
 
-let rec update_graph graph path value = assert false
-  (*match path with
-  | [] -> graph
-  | [x] -> graph
+let rec update_graph gr path value = 
+  match path with
+  | [] -> gr
+  | [x] -> gr
   | id1::rest -> match rest with
-    | id2::rest2 -> update_graph ((e_fold graph (add_arc graph id1 id2 value) (clone_nodes graph)) rest value)*)
-
-
+    | id2::rest2 -> let gr2 = add_arc gr id1 id2 (-value) in
+      let gr3 = add_arc gr2 id2 id1 value in
+      update_graph gr3 rest value
 
    

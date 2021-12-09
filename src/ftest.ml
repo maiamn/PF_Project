@@ -54,6 +54,7 @@ let () =
   
   (********************* TEST FUNCTION find_path **********************)
   let path2 = [0; 3; 1; 4; 5] in
+  let path3 = [0; 3; 1; 5] in 
   
   (*let path1 = find_path graph6 0 5 in
     let stringpath1 = string_of_path path1 in*)
@@ -66,13 +67,13 @@ let () =
 
   
   (******************** TEST FUNCTION update_graph ********************)
-  (*let graph7 = update_graph graph6 path1 label in
-    let stringgraph7 = gmap graph7 string_of_int in *)
+  let graph7 = update_graph graph6 path2 label in
+  let stringgraph7 = gmap graph7 string_of_int in 
 
   
   (* Rewrite the graph that has been read. *) 
-  (*let () = export outfile stringgraph6 in*)
-  (*let () = write_file outfile stringgraph6 in*)
+  let () = export outfile stringgraph7 in
+  (*let () = write_file outfile stringgraph7 in*)
 
 
   ()
