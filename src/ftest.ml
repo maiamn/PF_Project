@@ -53,36 +53,85 @@ let () =
 
   
   (********************* TEST FUNCTION find_path **********************)
-  let path2 = [0; 1; 5] in
-  let path3 = [0; 3; 1; 5] in 
-  
+
   (* let path1 = find_path graph6 0 5 in
   let stringpath1 = string_of_path path1 in
-  let () = printf "%s\n" ("path trouve : " ^ stringpath1) in *)
+  let () = printf "%s\n" ("path trouve : " ^ stringpath1) in
 
+  let path2 = [0; 1; 5] in
+  let path3 = [0; 3; 1; 5] in *)
   
   (*************** TEST FUNCTION get_incremental_value ****************)
-  let label = get_incremental_value graph6 path2 in
+  (*let label = get_incremental_value graph6 path2 in
   let labelstring = string_of_int label in 
-  let () = printf "%s\n" ("min : " ^ labelstring) in 
+  let () = printf "%s\n" ("min : " ^ labelstring) in *)
 
   
   (******************** TEST FUNCTION update_graph ********************)
-  let graph7 = update_graph graph6 path2 label in
+  (*let graph7 = update_graph graph6 path2 label in
+  let stringgraph7 = gmap graph7 string_of_int in*)
+
+
+  (******************* FONCTIONNEMENT FF ALGORITHM ********************)
+  (*
+  (*1*)
+  let pathT1 = find_path graph6 0 5 in
+  let stringpathT1 = string_of_path pathT1 in
+  let () = printf "%s\n" ("path trouve : " ^ stringpathT1) in
+
+  let pathTest = [0; 1; 5] in
+
+  let label = get_incremental_value graph6 pathTest in
+  let labelstring = string_of_int label in 
+  let () = printf "%s\n" ("min : " ^ labelstring) in 
+
+  let graph7 = update_graph graph6 pathTest label in
   let stringgraph7 = gmap graph7 string_of_int in
 
-  let pathT = find_path graph7 0 5 in
-  let stringpath2 = string_of_path pathT in
-  let () = printf "%s\n" ("path trouve : " ^ stringpath2) in
+  (*2*)
+  let pathT2 = find_path graph7 0 5 in
+  let stringpathT2 = string_of_path pathT2 in
+  let () = printf "%s\n" ("path trouve : " ^ stringpathT2) in
+
+  let pathTest2 = [0; 3; 1; 5] in
+
+  let label2 = get_incremental_value graph7 pathTest2 in
+  let labelstring2 = string_of_int label2 in 
+  let () = printf "%s\n" ("min : " ^ labelstring2) in
+
+  let graph8 = update_graph graph7 pathTest2 label2 in
+  let stringgraph8 = gmap graph8 string_of_int in 
+
+  (*3*)
+  let pathT3 = find_path graph8 0 5 in
+  let stringpathT3 = string_of_path pathT3 in
+  let () = printf "%s\n" ("path trouve : " ^ stringpathT3) in
+
+  let pathTest3 = [0; 2; 4; 5] in
+
+  let label3 = get_incremental_value graph8 pathTest3 in
+  let labelstring3 = string_of_int label3 in 
+  let () = printf "%s\n" ("min : " ^ labelstring3) in
+
+  let graph9 = update_graph graph8 pathTest3 label3 in
+  let stringgraph9 = gmap graph9 string_of_int in 
+
+
+  (*4*)
+  let pathT4 = find_path graph9 0 5 in
+  let stringpathT4 = string_of_path pathT4 in
+  let () = printf "%s\n" ("path trouve : " ^ stringpathT4) in
+  *)
 
 
   (******************* TEST FUNCTION ford_fulkerson *******************)
-  (*let (graphff, flowff) = ford_fulkerson intgraph 0 5 in
-  let stringgraph_ff = gmap graph7 string_of_int in
-  let () = printf "%s\n" ("flow : " ^ string_of_int flowff) in *)
+  let (graphff, flowff) = ford_fulkerson intgraph 0 5 in
+  let stringgraph_ff = gmap graphff string_of_int in
+  let () = printf "%s\n" ("flow : " ^ string_of_int flowff) in 
+
   
   (* Rewrite the graph that has been read. *) 
-  let () = export outfile stringgraph7 in
+  let () = export outfile stringgraph_ff in
   (*let () = write_file outfile stringgraph7 in*)
 
 

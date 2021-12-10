@@ -36,3 +36,4 @@ val loop_ff : int graph -> id -> id -> (int graph * int) option
 
 (* Function which takes a graph, a source, a sink and returns a tuple containing the final graph and the maximal flow  *)
 val ford_fulkerson : int graph -> id -> id -> (int graph * int)
+
