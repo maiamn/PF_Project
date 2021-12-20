@@ -2,6 +2,7 @@ open Gfile
 open Tools 
 open Fordfulkerson
 open Printf
+open Tasksassignment
 
 let () =
 
@@ -49,7 +50,7 @@ let () =
   
   (***************** TEST FUNCTION get_residual_graph *****************)
   let graph6 = get_residual_graph graph5 in 
-  let stringgraph6 = gmap graph6 string_of_int in
+  (*let stringgraph6 = gmap graph6 string_of_int in*)
 
   
   (********************* TEST FUNCTION find_path **********************)
@@ -129,9 +130,15 @@ let () =
   let stringgraph_ff = gmap graphff string_of_int in
   let () = printf "%s\n" ("flow : " ^ string_of_int flowff) in 
 
+
+  (********************** TEST TASKS ASSIGNMENTS **********************)
+  let graph_students = test_read_students "student 1 2" in
+  let graph_tasks = test_read_tasks graph_students "task 2 2" in
+  let graph_associations = test_read_associations graph_tasks "association 1 2" in
+  let stringgraphtasks = gmap graph_associations string_of_int in
   
   (* Rewrite the graph that has been read. *) 
-  let () = export outfile stringgraph_ff in
+  let () = export outfile stringgraphtasks in
   (*let () = write_file outfile stringgraph7 in*)
 
 
