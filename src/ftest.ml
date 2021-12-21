@@ -132,9 +132,9 @@ let () =
 
 
   (********************** TEST TASKS ASSIGNMENTS **********************)
-  let graph_students = test_read_students "student 1 2" in
-  let graph_tasks = test_read_tasks graph_students "task 2 2" in
-  let graph_associations = test_read_associations graph_tasks "association 1 2" in
+  let graph_students = read_students "student 1 2" in
+  let graph_tasks = read_tasks graph_students "task 2 2" in
+  let graph_associations = read_associations graph_tasks "association 1 2" in
   let stringgraphtasks = gmap graph_associations string_of_int in
   
   (* Rewrite the graph that has been read. *) 
