@@ -38,23 +38,23 @@ let init_graph = new_node (new_node empty_graph source) sink
 
 
 (*Function that creates a node for each student and an arc from source to student with label "number of tasks that this student can do"*)
-let read_students_aux graph line = 
+let read_students graph line = 
    Scanf.sscanf line "student %d %d" (fun student nb_tasks -> new_arc (new_node graph student) source student nb_tasks)
     
-let read_students = (fun phrase -> read_students (new_node empty_graph source) phrase)
+(* let test_read_students = (fun phrase -> read_students (new_node empty_graph source) phrase) *)
 
 (*Function that creates a node for each task and an arc from task to sink with label "number of students needed to achieve that task"*)
-let read_tasks_aux graph line = 
+let read_tasks graph line = 
    Scanf.sscanf line "task %d %d" (fun task nb_students -> new_arc (new_node graph task) task sink nb_students)
     
-let read_tasks = (fun graph phrase -> read_tasks (new_node graph sink) phrase)
+(* let test_read_tasks = (fun graph phrase -> read_tasks (new_node graph sink) phrase) *)
 
 
 (*Function that creates an arc for each association with default label 1*)
-let read_associations_aux graph line = 
+let read_associations graph line = 
    Scanf.sscanf line "association %d %d" (fun student task -> new_arc graph student task default_label)
     
-let read_associations = (fun graph phrase -> read_associations graph phrase) (*oui cette fonction est inutile en fait*)
+(*let test_read_associations = (fun graph phrase -> read_associations graph phrase) *)
 
 
 (* Function that creates a graph from a source file *)
