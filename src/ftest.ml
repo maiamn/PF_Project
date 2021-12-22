@@ -3,6 +3,7 @@ open Tools
 open Fordfulkerson
 open Printf
 open Tasksassignment
+open Graph
 
 let () =
 
@@ -34,8 +35,8 @@ let () =
 
   
   (*********************** TEST FUNCTION gmap *************************)
-  (*let graph3 = gmap graph (fun x -> string_of_int((int_of_string(x)*2))) in *)
-  let intgraph = gmap graph int_of_string in
+  (*let graph3 = gmap graph (fun x -> string_of_int((int_of_string(x)*2))) in 
+  let intgraph = gmap graph int_of_string in*)
 
   
   (********************** TEST FUNCTION add_arc ***********************)
@@ -44,13 +45,13 @@ let () =
 
   
   (****************** TEST FUNCTION init_flow_graph *******************)
-  let graph5 = init_flow_graph intgraph in 
-  (*let stringgraph5 = gmap graph5 string_of_flow_label in*)
+  (*let graph5 = init_flow_graph intgraph in 
+  let stringgraph5 = gmap graph5 string_of_flow_label in*)
 
   
   (***************** TEST FUNCTION get_residual_graph *****************)
-  let graph6 = get_residual_graph graph5 in 
-  (*let stringgraph6 = gmap graph6 string_of_int in*)
+  (*let graph6 = get_residual_graph graph5 in 
+  let stringgraph6 = gmap graph6 string_of_int in*)
 
   
   (********************* TEST FUNCTION find_path **********************)
@@ -126,19 +127,22 @@ let () =
 
 
   (******************* TEST FUNCTION ford_fulkerson *******************)
-  let (graphff, flowff) = ford_fulkerson intgraph 0 5 in
+  (*let (graphff, flowff) = ford_fulkerson intgraph 0 5 in
   let stringgraph_ff = gmap graphff string_of_int in
-  let () = printf "%s\n" ("flow : " ^ string_of_int flowff) in 
+  let () = printf "%s\n" ("flow : " ^ string_of_int flowff) in *)
 
 
   (********************** TEST TASKS ASSIGNMENTS **********************)
-  let graph_students = read_students "student 1 2" in
+  (*let graph_students = read_students empty_graph "student 1 2" in
   let graph_tasks = read_tasks graph_students "task 2 2" in
   let graph_associations = read_associations graph_tasks "association 1 2" in
-  let stringgraphtasks = gmap graph_associations string_of_int in
+  let stringgraphtasks = gmap graph_associations string_of_int in*)
+
+  let graphfile = read_file infile in
+  let stringgraphfile = gmap graphfile string_of_int in 
   
   (* Rewrite the graph that has been read. *) 
-  let () = export outfile stringgraphtasks in
+  let () = export outfile stringgraphfile in
   (*let () = write_file outfile stringgraph7 in*)
 
 

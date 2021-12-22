@@ -59,26 +59,29 @@ let read_associations graph line =
 
 (* Function that creates a graph from a source file *)
 let read_file file =
-  
-  (* Create an empty graph *)
-  let graph = empty_graph in
+
+  let open_file = open_in file in 
 
   (* Read all lines until end of file *)
-  let rec loop n =
+  let rec loop graph =
     try
       (* Read a line *)
-      let line = input_line file in 
-
+      let line = input_line open_file in 
+      
+      let graph_aux = 
       match line with 
-        | "student %d %d" ->
-        | "task %d %d" ->
-        | "association %d %d" ->
+        | "student %d %d" -> read_students graph line
+        | "task %d %d" -> read_tasks graph line
+        | "association %d %d" -> read_associations graph line
+        | _ -> read_students graph line
+      in
+      loop graph_aux
 
+    with End_of_file -> graph 
 
+  in
+ 
+  let result = loop init_graph in
 
-
-
-
-
-
-
+  close_in open_file ;
+  result

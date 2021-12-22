@@ -1,0 +1,16 @@
+student 1 2
+student 2 1
+student 3 3
+student 4 3
+task 5 3
+task 6 3
+task 7 2
+association 1 5
+association 1 6
+association 2 7
+association 3 5
+association 3 6
+association 3 7
+association 4 5
+association 4 6
+association 4 7 
