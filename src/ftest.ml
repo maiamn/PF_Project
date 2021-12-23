@@ -138,9 +138,14 @@ let () =
   let graph_associations = read_associations graph_tasks "association 1 2" in
   let stringgraphtasks = gmap graph_associations string_of_int in*)
 
+  (* Test the reading of a graph *)
   let graphfile = read_file infile in
   let stringgraphfile = gmap graphfile string_of_int in 
   
+  (* Test FF on the task assignment problem *)
+  (*let (graphFF, flow) = task_assignment infile in 
+  let stringgraphresult = gmap graphFF string_of_int in *)
+
   (* Rewrite the graph that has been read. *) 
   let () = export outfile stringgraphfile in
   (*let () = write_file outfile stringgraph7 in*)

@@ -27,7 +27,7 @@ val get_assignment_graph : string -> int graph * int
 val arc_processing : id -> id -> int -> string 
 
 (* Function to write the interpretation of graph in a file *)
-val task_assignment_aux : string -> int graph -> unit 
+val task_assignment_aux : string -> int graph -> int -> unit 
 
 
 

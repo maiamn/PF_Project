@@ -100,7 +100,8 @@ let read_file file =
         
         (* Ignore empty lines *)
         if line = "" then graph
-          
+        
+        (* Match the first character of the line *)
         else match line.[0] with 
           | 's' -> read_students graph line
           | 't' -> read_tasks graph line
@@ -117,3 +118,80 @@ let read_file file =
 
   close_in open_file ;
   result
+
+
+(* Function using FF algorithm 
+ * -> takes a source file
+ * -> returns the modificated graph and the maximal flow 
+ *)
+
+let get_assignment_graph file =
+   (* Define the initial graph *)
+   let graph1 = read_file file in 
+
+   (* Use FF algorithm to solve the problem of task assignment *)
+   let (new_graph, max_flow) = ford_fulkerson graph1 source sink in 
+
+   (new_graph, max_flow)
+
+
+
+
+(* Iterate on all arcs of the graph *)
+(* Various possibilities according to the nodes of the arc 
+ * source -> student_id   : "The student student_id can realize lbl tasks more"
+ * student_id -> source   : "The student student_id already realizes lbl tasks"
+ * student_id -> task_id  : "The student student_id can realize task task_id" 
+ * task_id -> student_id  : "The task task_id is realized by student student_id"
+ * task_id -> sink        : "lbl students are missing to work on the task task_id"
+ * sink -> task_id        : "lbl students will work on the task task_id"
+ *)
+let arc_processing id1 id2 lbl = 
+   if (id1=source) then let res="The student %d can realize %d tasks more \n" id2 lbl in  
+   else if (id2=source) then let res="The student %d already realizes %d tasks \n" id1 lbl in
+   else if (id1=sink) then let res="%d students will work on the task %d \n" lbl id2 in
+   else if (id2=sink) then let res="%d students are missing to work on the task %d \n" lbl id1 in
+   else let res="STILL NEED TO IMPLEMENT" in 
+
+   res 
+
+
+let task_assignment_aux file graph flow =
+   
+   (* Open a write-file *)
+   let result = open_out file in 
+ 
+   (* Write in this file *)
+   fprintf result "// This is the result of the task assignment // \n" ;
+
+   (* Write the maximal flow of this problem *)
+   fprintf result "The maximal flow of this problem is : %d \n" flow ; 
+
+   (* Write all arcs on result format *)
+   e_iter graph arc_processing ; 
+
+   (* End of file *)
+   fprintf result "// End of file // \n" ; 
+
+   (* Close the file *)
+   close_out result ; 
+   ()
+
+
+
+(* Main function of task assignment 
+ * -> takes a source file containing students, taks and associations 
+ * -> returns a file at format "task N is done by student S"
+ *)
+
+let task_assignment infile outfile = 
+   (* Get the result of FF *)
+   let (final_graph, max_flow) = get_assignment_graph infile in 
+
+   (* Read the graph to return an understandable file *)
+   let result = task_assignment_aux outfile final_graph max_flow in 
+
+   (* Return the result *)
+   ()
+ 
+
