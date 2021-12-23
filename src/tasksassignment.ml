@@ -11,7 +11,9 @@ It needs information about students and tasks.*)
 (*Input files format :
 - create a student : "student s n" where s is the student's number and n is the number of tasks that they can do 
 - create a task : "task t n" where t is the task's number et n is the number of students needed to achieve this task
-                                                                                                   - define what kind of task a student can do : "association s t" where s is the student's number and t is the task's number
+- define what kind of task a student can do : "association s t" where s is the student's number and t is the task's number
+
+/!\ the nodes numbers of students et tasks must be different! Otherwise, the graph created will not represent the problem correctly
 
 Example :
 student 1 2
@@ -115,4 +117,3 @@ let read_file file =
 
   close_in open_file ;
   result
-

@@ -26,7 +26,7 @@ let () =
   in
 
   (* Open file *)
-  let graph = from_file infile in
+  (*let graph = from_file infile in*)
  
 
 
