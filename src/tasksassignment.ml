@@ -146,14 +146,13 @@ let get_assignment_graph file =
  * task_id -> sink        : "lbl students are missing to work on the task task_id"
  * sink -> task_id        : "lbl students will work on the task task_id"
  *)
-let arc_processing id1 id2 lbl = 
-   if (id1=source) then let res="The student %d can realize %d tasks more \n" id2 lbl in  
-   else if (id2=source) then let res="The student %d already realizes %d tasks \n" id1 lbl in
-   else if (id1=sink) then let res="%d students will work on the task %d \n" lbl id2 in
-   else if (id2=sink) then let res="%d students are missing to work on the task %d \n" lbl id1 in
-   else let res="STILL NEED TO IMPLEMENT" in 
+let arc_processing = fun id1 id2 lbl ->
+   if (id1=source) then "The student " ^ (string_of_int id2) ^ " can realize " ^ (string_of_int lbl) ^ " tasks more \n"
+   else if (id2=source) then "The student " ^ (string_of_int id1) ^" already realizes " ^ (string_of_int lbl) ^ " tasks \n"
+   else if (id1=sink) then (string_of_int lbl) ^ " students will work on the task " ^ (string_of_int id2) ^ " \n"
+   else if (id2=sink) then (string_of_int lbl) ^ " students are missing to work on the task " ^ (string_of_int id1) ^ " \n"
+   else "STILL NEED TO IMPLEMENT"
 
-   res 
 
 
 let task_assignment_aux file graph flow =
@@ -168,7 +167,8 @@ let task_assignment_aux file graph flow =
    fprintf result "The maximal flow of this problem is : %d \n" flow ; 
 
    (* Write all arcs on result format *)
-   e_iter graph arc_processing ; 
+   e_iter graph (fun id1 id2 lbl -> (fprintf result (arc_processing id1 id2 lbl)))
+
 
    (* End of file *)
    fprintf result "// End of file // \n" ; 
