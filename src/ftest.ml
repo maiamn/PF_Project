@@ -146,9 +146,17 @@ let () =
   (*let (graphFF, flow) = task_assignment infile in 
   let stringgraphresult = gmap graphFF string_of_int in *)
 
+  (* Test de la fonction arc_processing *)
+  (*let phrase = arc_processing 1 5 3 in
+  let () = printf "%s \n" phrase in *)
+
+  (* Test the final function of task assignment problem *)
+  let () = task_assignment infile outfile in 
+
   (* Rewrite the graph that has been read. *) 
-  let () = export outfile stringgraphfile in
-  (*let () = write_file outfile stringgraph7 in*)
+  (*let () = export outfile stringgraphfile in *)
+  (*let () = write_file outfile stringgraph7 in *)
+ 
 
 
   ()

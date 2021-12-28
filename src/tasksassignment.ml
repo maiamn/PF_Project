@@ -9,17 +9,21 @@ open Printf
 It needs information about students and tasks.*)
 
 (*Input files format :
+- define the number of students working on the project
 - create a student : "student s n" where s is the student's number and n is the number of tasks that they can do 
+- define the number of tasks needed in the project 
 - create a task : "task t n" where t is the task's number et n is the number of students needed to achieve this task
 - define what kind of task a student can do : "association s t" where s is the student's number and t is the task's number
 
 /!\ the nodes numbers of students et tasks must be different! Otherwise, the graph created will not represent the problem correctly
 
 Example :
+number of students 4
 student 1 2
 student 2 1
 student 3 3
 student 4 3
+number of tasks 3
 task 5 3
 task 6 3
 task 7 2
@@ -147,11 +151,23 @@ let get_assignment_graph file =
  * sink -> task_id        : "lbl students will work on the task task_id"
  *)
 let arc_processing = fun id1 id2 lbl ->
+   (* source -> student_id   : "The student student_id can realize lbl tasks more" *)
    if (id1=source) then "The student " ^ (string_of_int id2) ^ " can realize " ^ (string_of_int lbl) ^ " tasks more \n"
+
+   (* student_id -> source   : "The student student_id already realizes lbl tasks" *)
    else if (id2=source) then "The student " ^ (string_of_int id1) ^" already realizes " ^ (string_of_int lbl) ^ " tasks \n"
+
+   (* sink -> task_id        : "lbl students will work on the task task_id" *)
    else if (id1=sink) then (string_of_int lbl) ^ " students will work on the task " ^ (string_of_int id2) ^ " \n"
+
+   (* task_id -> sink        : "lbl students are missing to work on the task task_id" *)
    else if (id2=sink) then (string_of_int lbl) ^ " students are missing to work on the task " ^ (string_of_int id1) ^ " \n"
-   else "STILL NEED TO IMPLEMENT"
+
+   (* student_id -> task_id  : "The student student_id can realize task task_id" *)
+   else if (is_student id1) then "The student " ^ (string_of_int id1) ^ " is able to realize the task " ^ (string_of_int id2) ^ " \n"
+
+   (* task_id -> student_id  : "The task task_id is realized by student student_id" *)
+   else "The task " ^ (string_of_int id1) ^ " is realized by the student " ^ (string_of_int id2) ^ " \n" 
 
 
 
@@ -167,8 +183,8 @@ let task_assignment_aux file graph flow =
    fprintf result "The maximal flow of this problem is : %d \n" flow ; 
 
    (* Write all arcs on result format *)
-   e_iter graph (fun id1 id2 lbl -> (fprintf result (arc_processing id1 id2 lbl)))
-
+   e_iter graph (fun id1 id2 lbl -> if (lbl <> 0) then fprintf result "%s \n" (arc_processing id1 id2 lbl)) ;
+   
 
    (* End of file *)
    fprintf result "// End of file // \n" ; 
