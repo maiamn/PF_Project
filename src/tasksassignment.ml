@@ -42,6 +42,28 @@ let sink = (-2)
 let default_label = 1
 
 
+(* Function that gets the number of students *)
+let get_number_of_students file = 
+
+    (* Open the file *)
+    let open_file = open_in file in 
+    
+    (* Initialize the number of students *)
+    let nb = ref 0 in 
+    
+    begin 
+        try 
+            while true do 
+                (* Read a line *)
+                let line = input_line open_file in 
+                (* Check if the line define a student *)
+                if line.[0]=='s' then nb:= !nb + 1
+            done
+        with End_of_file -> () ; 
+    end ; 
+    !nb ;;
+       
+
 
 (*Function that creates a node for each student and an arc from source to student with label "number of tasks that this student can do"*)
 let read_students graph line = 
@@ -52,6 +74,27 @@ let read_students graph line =
     failwith "from_file"
 
 
+(* Function that indicates the number of tasks needed in the project the project *)
+let get_number_of_tasks file = 
+
+    (* Open the file *)
+    let open_file = open_in file in 
+    
+    (* Initialize the number of students *)
+    let nb = ref 0 in 
+    
+    begin 
+        try 
+            while true do 
+                (* Read a line *)
+                let line = input_line open_file in 
+                (* Check if the line define a student *)
+                if line.[0]=='t' then nb:= !nb + 1
+            done
+        with End_of_file -> () ; 
+    end ; 
+    !nb ;;
+
 
 (*Function that creates a node for each task and an arc from task to sink with label "number of students needed to achieve that task"*)
 let read_tasks graph line =
@@ -61,7 +104,6 @@ let read_tasks graph line =
     Printf.printf "Impossible to read task in line : \n%s\n" line ; 
     failwith "from_file"
     
-
 
 (*Function that creates an arc for each association with default label 1*)
 let read_associations graph line = 
@@ -131,7 +173,7 @@ let read_file file =
 
 let get_assignment_graph file =
    (* Define the initial graph *)
-   let graph1 = read_file file in 
+   let graph1= read_file file in 
 
    (* Use FF algorithm to solve the problem of task assignment *)
    let (new_graph, max_flow) = ford_fulkerson graph1 source sink in 
@@ -164,7 +206,7 @@ let arc_processing = fun id1 id2 lbl ->
    else if (id2=sink) then (string_of_int lbl) ^ " students are missing to work on the task " ^ (string_of_int id1) ^ " \n"
 
    (* student_id -> task_id  : "The student student_id can realize task task_id" *)
-   else if (is_student id1) then "The student " ^ (string_of_int id1) ^ " is able to realize the task " ^ (string_of_int id2) ^ " \n"
+   else if (id2=0) (*is_student id1*) then "The student " ^ (string_of_int id1) ^ " is able to realize the task " ^ (string_of_int id2) ^ " \n"
 
    (* task_id -> student_id  : "The task task_id is realized by student student_id" *)
    else "The task " ^ (string_of_int id1) ^ " is realized by the student " ^ (string_of_int id2) ^ " \n" 

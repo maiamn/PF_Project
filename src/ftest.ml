@@ -30,6 +30,15 @@ let () =
  
 
 
+
+
+
+
+
+  (********************************************************************)
+  (****************************** TOOLS *******************************)
+  (********************************************************************)
+
   (******************** TEST FUNCTION clone_nodes *********************)
   (*let graph2 = clone_nodes graph in*)
 
@@ -73,6 +82,16 @@ let () =
   (*let graph7 = update_graph graph6 path2 label in
   let stringgraph7 = gmap graph7 string_of_int in*)
 
+
+
+
+
+
+
+
+  (********************************************************************)
+  (********************* FORD FULKERSON ALGORITHM *********************)
+  (********************************************************************)
 
   (******************* FONCTIONNEMENT FF ALGORITHM ********************)
   (*
@@ -132,26 +151,43 @@ let () =
   let () = printf "%s\n" ("flow : " ^ string_of_int flowff) in *)
 
 
+
+
+
+
+
+
+  (********************************************************************)
   (********************** TEST TASKS ASSIGNMENTS **********************)
+  (********************************************************************)
+ 
+  (****************** TEST functions to read a file *******************)
+
   (*let graph_students = read_students empty_graph "student 1 2" in
   let graph_tasks = read_tasks graph_students "task 2 2" in
   let graph_associations = read_associations graph_tasks "association 1 2" in
-  let stringgraphtasks = gmap graph_associations string_of_int in*)
+  let stringgraphtasks = gmap graph_associations string_of_int in *)
 
-  (* Test the reading of a graph *)
-  let graphfile = read_file infile in
-  let stringgraphfile = gmap graphfile string_of_int in 
+  let number_of_students = get_number_of_students infile in 
+  let number_of_tasks = get_number_of_tasks infile in 
+  let () = printf "%s\n" ("Number of students working on this project : " ^ string_of_int number_of_students) in 
+  let () = printf "%s\n" ("Number of tasks needed is this project : " ^ string_of_int number_of_tasks) in 
+
+  (******************* TEST FUNCTION global reading *******************)
+  (* let graphfile = read_file infile in
+  let stringgraphfile = gmap graphfile string_of_int in *)
   
-  (* Test FF on the task assignment problem *)
+  (************* TEST apply FF on tasks assignment problem ************)
   (*let (graphFF, flow) = task_assignment infile in 
   let stringgraphresult = gmap graphFF string_of_int in *)
 
-  (* Test de la fonction arc_processing *)
+  (******************* TEST FUNCTION arc_processing *******************)
   (*let phrase = arc_processing 1 5 3 in
   let () = printf "%s \n" phrase in *)
 
-  (* Test the final function of task assignment problem *)
+  (************************ TEST FINAL FUNCTION ***********************)
   let () = task_assignment infile outfile in 
+
 
   (* Rewrite the graph that has been read. *) 
   (*let () = export outfile stringgraphfile in *)
