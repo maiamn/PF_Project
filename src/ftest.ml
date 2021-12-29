@@ -175,6 +175,31 @@ let () =
   (*let phrase = arc_processing 1 5 3 in
     let () = printf "%s \n" phrase in *)
 
+  (********************* TEST FUNCTION is_student *********************)
+  
+  (*let list1 = [1;2;3] in
+  let list2 = add_student_id list1 "student 4 2" in 
+  let () = print_list list2 in*) 
+
+
+  (*let list = get_list_of_students infile in
+  let res0 = is_student 0 list in
+  let res1 = is_student 1 list in 
+  let res2 = is_student 2 list in 
+  let res3 = is_student 3 list in 
+  let res4 = is_student 4 list in 
+  let res5 = is_student 5 list in 
+  let res6 = is_student 6 list in 
+ 
+  let () = printf "%B \n" res0 in 
+  let () = printf "%B \n" res1 in 
+  let () = printf "%B \n" res2 in 
+  let () = printf "%B \n" res3 in 
+  let () = printf "%B \n" res4 in 
+  let () = printf "%B \n" res5 in 
+  let () = printf "%B \n" res6 in *)
+
+
   (************************ TEST FINAL FUNCTION ***********************)
   let () = task_assignment infile outfile in 
 

@@ -36,8 +36,8 @@ open Printf
 let source = (-1)
 let sink = (-2)
 let default_label = 1
-let students_list = [1;2;3;4]
-let tasks_list = [5;6;7]
+
+
 
 (*Function that creates a node for each student and an arc from source to student with label "number of tasks that this student can do"*)
 let read_students graph line = 
@@ -48,6 +48,7 @@ let read_students graph line =
     failwith "from_file"
 
 
+
 (*Function that creates a node for each task and an arc from task to sink with label "number of students needed to achieve that task"*)
 let read_tasks graph line =
   try 
@@ -55,6 +56,7 @@ let read_tasks graph line =
   with e ->
     Printf.printf "Impossible to read task in line : \n%s\n" line ; 
     failwith "from_file"
+
 
 
 (*Function that creates an arc for each association with default label 1*)
@@ -118,6 +120,58 @@ let read_file file =
   result
 
 
+
+(* Function that adds an id to a list *)
+let add_student_id list line =
+  try 
+    Scanf.sscanf line "student %d %d" (fun id nb_tasks -> List.append list [id]) 
+  with e ->
+    Printf.printf "Impossible to read student in line : \n%s\n" line ; 
+    failwith "from_file" 
+
+
+
+(* Function that creates a list containing id of all students *)
+let get_list_of_students file =
+  (* Open the file *)
+  let open_file = open_in file in 
+
+  (* Initialize the list *)
+  let init_list = [] in 
+
+  (* Read all lines until end of file *)
+  let rec loop list =
+    try
+
+      (* Read a line *)
+      let line = input_line open_file in 
+
+      (* Remove spaces from line*)
+      let line = String.trim line in
+
+      let list_aux = 
+
+        (* Ignore empty lines *)
+        if line = "" then list
+
+        (* Match the first character of the line *)
+        else match line.[0] with 
+          | 's' -> add_student_id list line
+          | _ -> list
+      in
+      loop list_aux
+
+    with End_of_file -> list 
+
+  in
+
+  let result = loop init_list in
+
+  close_in open_file ;
+  result
+
+
+
 (* Function using FF algorithm 
  * -> takes a source file
  * -> returns the modificated graph and the maximal flow 
@@ -133,8 +187,14 @@ let get_assignment_graph file =
   (new_graph, max_flow)
 
 
+
+
 (* Function to define if an id corresponds to a student *)
-let is_student id list = List.mem id list 
+let rec is_student id = function 
+  | [] -> false 
+  | x :: rest -> if (x==id) then true else (is_student id rest)
+
+
 
 (* Iterate on all arcs of the graph *)
 (* Various possibilities according to the nodes of the arc 
@@ -145,7 +205,7 @@ let is_student id list = List.mem id list
  * task_id -> sink        : "lbl students are missing to work on the task task_id"
  * sink -> task_id        : "lbl students will work on the task task_id"
 *)
-let arc_processing = fun id1 id2 lbl ->
+let arc_processing = fun id1 id2 lbl list ->
   (* source -> student_id   : "The student student_id can realize lbl tasks more" *)
   if (id1=source) then "The student " ^ (string_of_int id2) ^ " can realize " ^ (string_of_int lbl) ^ " tasks more \n"
 
@@ -159,14 +219,14 @@ let arc_processing = fun id1 id2 lbl ->
   else if (id2=sink) then (string_of_int lbl) ^ " students are missing to work on the task " ^ (string_of_int id1) ^ " \n"
 
   (* student_id -> task_id  : "The student student_id can realize task task_id" *)
-  else if (is_student id1 students_list) then "The student " ^ (string_of_int id1) ^ " is able to realize the task " ^ (string_of_int id2) ^ " \n"
+  else if (is_student id1 list) then "The student " ^ (string_of_int id1) ^ " is able to realize the task " ^ (string_of_int id2) ^ " \n"
 
   (* task_id -> student_id  : "The task task_id is realized by student student_id" *)
   else "The task " ^ (string_of_int id1) ^ " is realized by the student " ^ (string_of_int id2) ^ " \n" 
 
 
 
-let task_assignment_aux file graph flow =
+let task_assignment_aux file graph flow student_list =
 
   (* Open a write-file *)
   let result = open_out file in 
@@ -178,7 +238,7 @@ let task_assignment_aux file graph flow =
   fprintf result "The maximal flow of this problem is : %d \n" flow ; 
 
   (* Write all arcs on result format *)
-  e_iter graph (fun id1 id2 lbl -> if (lbl <> 0) then fprintf result "%s \n" (arc_processing id1 id2 lbl)) ;
+  e_iter graph (fun id1 id2 lbl -> if (lbl <> 0) then fprintf result "%s \n" (arc_processing id1 id2 lbl student_list)) ;
 
 
   (* End of file *)
@@ -196,11 +256,14 @@ let task_assignment_aux file graph flow =
 *)
 
 let task_assignment infile outfile = 
+  (* Define the list of id students *)
+  let students = get_list_of_students infile in 
+
   (* Get the result of FF *)
   let (final_graph, max_flow) = get_assignment_graph infile in 
 
   (* Read the graph to return an understandable file *)
-  let result = task_assignment_aux outfile final_graph max_flow in 
+  let result = task_assignment_aux outfile final_graph max_flow students in 
 
   (* Return the result *)
   result ;
