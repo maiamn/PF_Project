@@ -9,21 +9,17 @@ open Printf
   It needs information about students and tasks.*)
 
 (*Input files format :
-  - define the number of students working on the project
   - create a student : "student s n" where s is the student's number and n is the number of tasks that they can do 
-  - define the number of tasks needed in the project 
   - create a task : "task t n" where t is the task's number et n is the number of students needed to achieve this task
   - define what kind of task a student can do : "association s t" where s is the student's number and t is the task's number
 
   /!\ the nodes numbers of students et tasks must be different! Otherwise, the graph created will not represent the problem correctly
 
   Example :
-  number of students 4
   student 1 2
   student 2 1
   student 3 3
   student 4 3
-  number of tasks 3
   task 5 3
   task 6 3
   task 7 2
@@ -40,31 +36,8 @@ open Printf
 let source = (-1)
 let sink = (-2)
 let default_label = 1
-
-
-(* Function that gets the number of students *)
-let get_number_of_students file = 
-
-  (* Open the file *)
-  let open_file = open_in file in 
-
-  (* Initialize the number of students *)
-  let nb = ref 0 in 
-
-  begin 
-    try 
-      while true do 
-        (* Read a line *)
-        let line = input_line open_file in 
-        (* Check if the line defines a student *)
-        if line.[0]=='s' then nb:= !nb + 1
-      done
-    with End_of_file -> () ; 
-  end ; 
-  close_in open_file ;
-  !nb ;;
-
-
+let students_list = [1;2;3;4]
+let tasks_list = [5;6;7]
 
 (*Function that creates a node for each student and an arc from source to student with label "number of tasks that this student can do"*)
 let read_students graph line = 
@@ -73,29 +46,6 @@ let read_students graph line =
   with e ->
     Printf.printf "Impossible to read student in line : \n%s\n" line ; 
     failwith "from_file"
-
-
-(* Function that indicates the number of tasks needed in the project *)
-let get_number_of_tasks file = 
-
-  (* Open the file *)
-  let open_file = open_in file in 
-
-  (* Initialize the number of tasks *)
-  let nb = ref 0 in 
-
-  begin 
-    try 
-      while true do 
-        (* Read a line *)
-        let line = input_line open_file in 
-        (* Check if the line defines a task *)
-        if line.[0]=='t' then nb:= !nb + 1
-      done
-    with End_of_file -> () ; 
-  end ; 
-  close_in open_file ;
-  !nb ;;
 
 
 (*Function that creates a node for each task and an arc from task to sink with label "number of students needed to achieve that task"*)
@@ -156,7 +106,7 @@ let read_file file =
           | 'a' -> read_associations graph line
           | _ -> read_comment graph line
       in
-      loop graph_aux 
+      loop graph_aux
 
     with End_of_file -> graph 
 
@@ -183,7 +133,8 @@ let get_assignment_graph file =
   (new_graph, max_flow)
 
 
-
+(* Function to define if an id corresponds to a student *)
+let is_student id list = List.mem id list 
 
 (* Iterate on all arcs of the graph *)
 (* Various possibilities according to the nodes of the arc 
@@ -208,7 +159,7 @@ let arc_processing = fun id1 id2 lbl ->
   else if (id2=sink) then (string_of_int lbl) ^ " students are missing to work on the task " ^ (string_of_int id1) ^ " \n"
 
   (* student_id -> task_id  : "The student student_id can realize task task_id" *)
-  else if (id2=0) (*is_student id1*) then "The student " ^ (string_of_int id1) ^ " is able to realize the task " ^ (string_of_int id2) ^ " \n"
+  else if (is_student id1 students_list) then "The student " ^ (string_of_int id1) ^ " is able to realize the task " ^ (string_of_int id2) ^ " \n"
 
   (* task_id -> student_id  : "The task task_id is realized by student student_id" *)
   else "The task " ^ (string_of_int id1) ^ " is realized by the student " ^ (string_of_int id2) ^ " \n" 

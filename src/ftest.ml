@@ -163,11 +163,6 @@ let () =
     let graph_associations = read_associations graph_tasks "association 1 2" in
     let stringgraphtasks = gmap graph_associations string_of_int in *)
 
-  let number_of_students = get_number_of_students infile in 
-  let number_of_tasks = get_number_of_tasks infile in 
-  let () = printf "%s\n" ("Number of students working on this project : " ^ string_of_int number_of_students) in 
-  let () = printf "%s\n" ("Number of tasks needed is this project : " ^ string_of_int number_of_tasks) in 
-
   (******************* TEST FUNCTION global reading *******************)
   (* let graphfile = read_file infile in
      let stringgraphfile = gmap graphfile string_of_int in *)
