@@ -27,11 +27,6 @@ let () =
 
   (* Open file *)
   (*let graph = from_file infile in*)
- 
-
-
-
-
 
 
 
@@ -42,45 +37,45 @@ let () =
   (******************** TEST FUNCTION clone_nodes *********************)
   (*let graph2 = clone_nodes graph in*)
 
-  
+
   (*********************** TEST FUNCTION gmap *************************)
   (*let graph3 = gmap graph (fun x -> string_of_int((int_of_string(x)*2))) in 
-  let intgraph = gmap graph int_of_string in*)
+    let intgraph = gmap graph int_of_string in*)
 
-  
+
   (********************** TEST FUNCTION add_arc ***********************)
   (*let graph4 = add_arc intgraph 0 4 1000 in
     let stringgraph4 = gmap graph4 string_of_int in*)
 
-  
+
   (****************** TEST FUNCTION init_flow_graph *******************)
   (*let graph5 = init_flow_graph intgraph in 
-  let stringgraph5 = gmap graph5 string_of_flow_label in*)
+    let stringgraph5 = gmap graph5 string_of_flow_label in*)
 
-  
+
   (***************** TEST FUNCTION get_residual_graph *****************)
   (*let graph6 = get_residual_graph graph5 in 
-  let stringgraph6 = gmap graph6 string_of_int in*)
+    let stringgraph6 = gmap graph6 string_of_int in*)
 
-  
+
   (********************* TEST FUNCTION find_path **********************)
 
   (* let path1 = find_path graph6 0 5 in
-  let stringpath1 = string_of_path path1 in
-  let () = printf "%s\n" ("path trouve : " ^ stringpath1) in
+     let stringpath1 = string_of_path path1 in
+     let () = printf "%s\n" ("path trouve : " ^ stringpath1) in
 
-  let path2 = [0; 1; 5] in
-  let path3 = [0; 3; 1; 5] in *)
-  
+     let path2 = [0; 1; 5] in
+     let path3 = [0; 3; 1; 5] in *)
+
   (*************** TEST FUNCTION get_incremental_value ****************)
   (*let label = get_incremental_value graph6 path2 in
-  let labelstring = string_of_int label in 
-  let () = printf "%s\n" ("min : " ^ labelstring) in *)
+    let labelstring = string_of_int label in 
+    let () = printf "%s\n" ("min : " ^ labelstring) in *)
 
-  
+
   (******************** TEST FUNCTION update_graph ********************)
   (*let graph7 = update_graph graph6 path2 label in
-  let stringgraph7 = gmap graph7 string_of_int in*)
+    let stringgraph7 = gmap graph7 string_of_int in*)
 
 
 
@@ -147,8 +142,8 @@ let () =
 
   (******************* TEST FUNCTION ford_fulkerson *******************)
   (*let (graphff, flowff) = ford_fulkerson intgraph 0 5 in
-  let stringgraph_ff = gmap graphff string_of_int in
-  let () = printf "%s\n" ("flow : " ^ string_of_int flowff) in *)
+    let stringgraph_ff = gmap graphff string_of_int in
+    let () = printf "%s\n" ("flow : " ^ string_of_int flowff) in *)
 
 
 
@@ -160,13 +155,13 @@ let () =
   (********************************************************************)
   (********************** TEST TASKS ASSIGNMENTS **********************)
   (********************************************************************)
- 
+
   (****************** TEST functions to read a file *******************)
 
   (*let graph_students = read_students empty_graph "student 1 2" in
-  let graph_tasks = read_tasks graph_students "task 2 2" in
-  let graph_associations = read_associations graph_tasks "association 1 2" in
-  let stringgraphtasks = gmap graph_associations string_of_int in *)
+    let graph_tasks = read_tasks graph_students "task 2 2" in
+    let graph_associations = read_associations graph_tasks "association 1 2" in
+    let stringgraphtasks = gmap graph_associations string_of_int in *)
 
   let number_of_students = get_number_of_students infile in 
   let number_of_tasks = get_number_of_tasks infile in 
@@ -175,15 +170,15 @@ let () =
 
   (******************* TEST FUNCTION global reading *******************)
   (* let graphfile = read_file infile in
-  let stringgraphfile = gmap graphfile string_of_int in *)
-  
+     let stringgraphfile = gmap graphfile string_of_int in *)
+
   (************* TEST apply FF on tasks assignment problem ************)
   (*let (graphFF, flow) = task_assignment infile in 
-  let stringgraphresult = gmap graphFF string_of_int in *)
+    let stringgraphresult = gmap graphFF string_of_int in *)
 
   (******************* TEST FUNCTION arc_processing *******************)
   (*let phrase = arc_processing 1 5 3 in
-  let () = printf "%s \n" phrase in *)
+    let () = printf "%s \n" phrase in *)
 
   (************************ TEST FINAL FUNCTION ***********************)
   let () = task_assignment infile outfile in 
@@ -192,7 +187,7 @@ let () =
   (* Rewrite the graph that has been read. *) 
   (*let () = export outfile stringgraphfile in *)
   (*let () = write_file outfile stringgraph7 in *)
- 
+
 
 
   ()

@@ -106,13 +106,13 @@ let from_file path =
    /* This is a comment */
 
    digraph finite_state_machine {
-	rankdir=LR;
-	node [shape = circle];
-	0 -> 2 [label = "SS(B)"];
+   	rankdir=LR;
+   	node [shape = circle];
+   	0 -> 2 [label = "SS(B)"];
         .
         .
         .
-	8 -> 5 [label = "S(a)"];
+   	8 -> 5 [label = "S(a)"];
    }
 *)
 
@@ -126,7 +126,7 @@ let export file graph =
 
   (* Write the dot format graph *)
   fprintf dot 
-     "digraph dotgraph { \n rankdir=LR; \n node [shape = circle]; \n" ; 
+    "digraph dotgraph { \n rankdir=LR; \n node [shape = circle]; \n" ; 
 
   (* Write all arcs on dot format *)
   e_iter graph (fun id1 id2 lbl -> fprintf dot "%d -> %d [label = %s] ;\n" id1 id2 lbl) ;

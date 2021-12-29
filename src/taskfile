@@ -1,26 +1,26 @@
 %%%% Students %%%%%
-% student id work_capacity
-student 1 2
-student 2 1
-student 3 3
-student 4 3
+%% student id work_capacity
+  student 1 2
+  student 2 1
+  student 3 3
+  student 4 3
 
 
 %%%%% Tasks %%%%%
-% task id needed_work
-task 5 3
-task 6 3
-task 7 2
+%% task id needed_work
+  task 5 3
+  task 6 3
+  task 7 2
 
 
 %%%%% Associations %%%%%
-% association student task
-association 1 5
-association 1 6
-association 2 7
-association 3 5
-association 3 6
-association 3 7
-association 4 5
-association 4 6
-association 4 7 
+%% association student task
+  association 1 5
+  association 1 6
+  association 2 7
+  association 3 5
+  association 3 6
+  association 3 7
+  association 4 5
+  association 4 6
+  association 4 7 

@@ -17,7 +17,7 @@ val write_file: path -> string graph -> unit
 val export: file -> string graph -> unit
 
 (* Writes an id list in string format in a file 
-val export_path : file -> pathId option -> unit *)
+   val export_path : file -> pathId option -> unit *)
 
 
 
