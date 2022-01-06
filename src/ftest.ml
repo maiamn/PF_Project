@@ -26,7 +26,7 @@ let () =
   in
 
   (* Open file *)
-  (*let graph = from_file infile in*)
+  let graph = from_file infile in
 
 
 
@@ -39,8 +39,8 @@ let () =
 
 
   (*********************** TEST FUNCTION gmap *************************)
-  (*let graph3 = gmap graph (fun x -> string_of_int((int_of_string(x)*2))) in 
-    let intgraph = gmap graph int_of_string in*)
+  (*let graph3 = gmap graph (fun x -> string_of_int((int_of_string(x)*2))) in *)
+  let intgraph = gmap graph int_of_string in
 
 
   (********************** TEST FUNCTION add_arc ***********************)
@@ -141,71 +141,13 @@ let () =
 
 
   (******************* TEST FUNCTION ford_fulkerson *******************)
-  (*let (graphff, flowff) = ford_fulkerson intgraph 0 5 in
-    let stringgraph_ff = gmap graphff string_of_int in
-    let () = printf "%s\n" ("flow : " ^ string_of_int flowff) in *)
-
-
-
-
-
-
-
-
-  (********************************************************************)
-  (********************** TEST TASKS ASSIGNMENTS **********************)
-  (********************************************************************)
-
-  (****************** TEST functions to read a file *******************)
-
-  (*let graph_students = read_students empty_graph "student 1 2" in
-    let graph_tasks = read_tasks graph_students "task 2 2" in
-    let graph_associations = read_associations graph_tasks "association 1 2" in
-    let stringgraphtasks = gmap graph_associations string_of_int in *)
-
-  (******************* TEST FUNCTION global reading *******************)
-  (* let graphfile = read_file infile in
-     let stringgraphfile = gmap graphfile string_of_int in *)
-
-  (************* TEST apply FF on tasks assignment problem ************)
-  (*let (graphFF, flow) = task_assignment infile in 
-    let stringgraphresult = gmap graphFF string_of_int in *)
-
-  (******************* TEST FUNCTION arc_processing *******************)
-  (*let phrase = arc_processing 1 5 3 in
-    let () = printf "%s \n" phrase in *)
-
-  (********************* TEST FUNCTION is_student *********************)
-  
-  (*let list1 = [1;2;3] in
-  let list2 = add_student_id list1 "student 4 2" in 
-  let () = print_list list2 in*) 
-
-
-  (*let list = get_list_of_students infile in
-  let res0 = is_student 0 list in
-  let res1 = is_student 1 list in 
-  let res2 = is_student 2 list in 
-  let res3 = is_student 3 list in 
-  let res4 = is_student 4 list in 
-  let res5 = is_student 5 list in 
-  let res6 = is_student 6 list in 
- 
-  let () = printf "%B \n" res0 in 
-  let () = printf "%B \n" res1 in 
-  let () = printf "%B \n" res2 in 
-  let () = printf "%B \n" res3 in 
-  let () = printf "%B \n" res4 in 
-  let () = printf "%B \n" res5 in 
-  let () = printf "%B \n" res6 in *)
-
-
-  (************************ TEST FINAL FUNCTION ***********************)
-  let () = task_assignment infile outfile in 
+  let (graphff, flowff) = ford_fulkerson intgraph 0 5 in
+  let stringgraph_ff = gmap graphff string_of_int in
+  let () = printf "%s\n" ("flow : " ^ string_of_int flowff) in 
 
 
   (* Rewrite the graph that has been read. *) 
-  (*let () = export outfile stringgraphfile in *)
+  let () = export outfile stringgraph_ff in 
   (*let () = write_file outfile stringgraph7 in *)
 
 

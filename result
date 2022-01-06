@@ -1,0 +1,35 @@
+// This is the result of the task assignment // 
+The maximal flow of this problem is : 8 
+3 students will work on the task 5 
+ 
+3 students will work on the task 6 
+ 
+2 students will work on the task 7 
+ 
+The task 5 is realized by the student 1 
+ 
+The task 5 is realized by the student 3 
+ 
+The task 5 is realized by the student 4 
+ 
+The student 1 already realizes 2 tasks 
+ 
+The student 2 can realize 1 tasks more 
+ 
+The task 6 is realized by the student 1 
+ 
+The task 6 is realized by the student 3 
+ 
+The task 6 is realized by the student 4 
+ 
+The student 3 already realizes 3 tasks 
+ 
+The task 7 is realized by the student 3 
+ 
+The task 7 is realized by the student 4 
+ 
+The student 4 already realizes 3 tasks 
+ 
+The student 2 is able to realize the task 7 
+ 
+// End of file // 
